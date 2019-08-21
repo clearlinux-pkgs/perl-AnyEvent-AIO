@@ -4,13 +4,15 @@
 #
 Name     : perl-AnyEvent-AIO
 Version  : 1.1
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/AnyEvent-AIO-1.1.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/AnyEvent-AIO-1.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Artistic-1.0 GPL-1.0
 Requires: perl-AnyEvent-AIO-license = %{version}-%{release}
+Requires: perl(AnyEvent)
+Requires: perl(IO::AIO)
 BuildRequires : buildreq-cpan
 BuildRequires : perl(AnyEvent)
 BuildRequires : perl(IO::AIO)
