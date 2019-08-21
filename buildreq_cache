@@ -1,0 +1,4 @@
+1.1
+perl(AnyEvent)
+perl(IO::AIO)
+perl(common::sense)
