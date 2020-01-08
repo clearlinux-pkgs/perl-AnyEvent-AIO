@@ -4,13 +4,14 @@
 #
 Name     : perl-AnyEvent-AIO
 Version  : 1.1
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/AnyEvent-AIO-1.1.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/AnyEvent-AIO-1.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Artistic-1.0 GPL-1.0
 Requires: perl-AnyEvent-AIO-license = %{version}-%{release}
+Requires: perl-AnyEvent-AIO-perl = %{version}-%{release}
 Requires: perl(AnyEvent)
 Requires: perl(IO::AIO)
 BuildRequires : buildreq-cpan
@@ -43,8 +44,18 @@ Group: Default
 license components for the perl-AnyEvent-AIO package.
 
 
+%package perl
+Summary: perl components for the perl-AnyEvent-AIO package.
+Group: Default
+Requires: perl-AnyEvent-AIO = %{version}-%{release}
+
+%description perl
+perl components for the perl-AnyEvent-AIO package.
+
+
 %prep
 %setup -q -n AnyEvent-AIO-1.1
+cd %{_builddir}/AnyEvent-AIO-1.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
@@ -69,7 +80,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-AnyEvent-AIO
-cp COPYING %{buildroot}/usr/share/package-licenses/perl-AnyEvent-AIO/COPYING
+cp %{_builddir}/AnyEvent-AIO-1.1/COPYING %{buildroot}/usr/share/package-licenses/perl-AnyEvent-AIO/9a56f3b919dfc8fced3803e165a2e38de62646e5
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -82,7 +93,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/AnyEvent/AIO.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -90,4 +100,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-AnyEvent-AIO/COPYING
+/usr/share/package-licenses/perl-AnyEvent-AIO/9a56f3b919dfc8fced3803e165a2e38de62646e5
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/AnyEvent/AIO.pm
